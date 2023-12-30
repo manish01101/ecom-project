@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: ['true', 'Password is required'],
       maxLength: [15, "Password must be at least 8 chars"],
-      select: false
+      select: false //this is only true while querying db
     },
     role: {
       type: String,
@@ -46,7 +46,7 @@ userSchema.methods = {
     return await bcrypt.compare(enterPassword, this.password)
   },
   //generate JWT token
-  getJWTToken: function() {
+  getJWTtoken: function() {
     JWT.sign({_id: this._id}, config.JWT_SECRET, {
       expiresIn: config.JWT_EXPIRY
     })
